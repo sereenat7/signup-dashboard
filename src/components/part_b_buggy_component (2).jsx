@@ -27,10 +27,10 @@ export default function SignupsThisWeek() {
   }, []);
 
   // Count signups in the last 7 days.
+  const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000); // FIX (bug 2): real 7-day cutoff, not "same month"
   const lastWeekCount = signups.filter((s) => {
     const d = new Date(s.event_ts);
-    // Intended: keep signups from the last 7 days.
-    return d.getMonth() === now.getMonth();
+    return d >= sevenDaysAgo && d <= now; // FIX (bug 2): compare against the actual 7-day window
   }).length;
 
   return (
