@@ -14,10 +14,10 @@
 // Each item from /api/events looks like:
 //   { user_id: 1042, event: "signup", event_ts: "2026-08-10 14:05", source: "organic" }
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SignupsThisWeek() {
-  const [signups, setSignups] = useState();
+  const [signups, setSignups] = useState([]); // FIX (bug 1): start as [] not undefined, so .filter never runs on undefined
   const now = new Date();
 
   useEffect(() => {
